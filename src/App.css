@@ -1,0 +1,79 @@
+:root {
+	--orangeRed: #FF3811;
+	--orange: #FF912C;
+	--black: #000;
+	--dark1: #151515;
+	--dark2: #444;
+	--dark3: #737373;
+	--gray: #a2a2a2;
+	--light3: #d0d0d0;
+	--light2: #e8e8e8;
+	--light1: #f3f3f3;
+	--white: #fff;
+}
+
+.container {
+	width: 100%;
+	max-width: 1140px;
+	margin: 0 auto;
+}
+
+/* Buttons */
+.btn {
+	height: auto;
+	font-size: 18px;
+	font-weight: 600;
+	text-transform: initial;
+	color: var(--white);
+	background-color: var(--orangeRed);
+	padding: 17px 26px;
+	border: none;
+}
+
+.btn.secondary {
+	background-color: #fff3;
+}
+
+.btn:hover,
+.btn:active,
+.btn:focus {
+	outline: 0;
+	background-color: var(--orange);
+}
+
+.btn.secondary:hover,
+.btn.secondary:active,
+.btn.secondary:focus {
+	background-color: #fff5;
+}
+
+.btn.full {
+	width: 100%;
+}
+
+.btn.alt {
+	color: var(--orangeRed);
+	background-color: transparent;
+	border: 1px solid var(--orangeRed);
+}
+
+.btn.alt:hover,
+.btn.alt:active,
+.btn.alt:focus {
+	outline: 0;
+	color: var(--orange);
+	background-color: transparent;
+	border: 1px solid var(--orange);
+}
+
+.btn.secondary.alt {
+	color: var(--white);
+	border: 1px solid var(--white);
+}
+
+.btn.secondary.alt:hover,
+.btn.secondary.alt:active,
+.btn.secondary.alt:focus {
+	color: var(--light1);
+	border: 1px solid var(--light1);
+}

@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginImg from '../../assets/images/login/login.svg';
 import PopupSignIn from '../../components/PopupSignIn/PopupSignIn';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import { setJwtToken } from '../../utils/functions';
 
 const inputClassName = 'w-full text-base border border-[var(--light2)] focus:outline-none py-3 px-6 rounded-lg mb-7';
 
@@ -28,6 +29,9 @@ const SignIn = () => {
 				// if (res?.user?.emailVerified) {
 				form.reset();
 				setError('');
+
+				setJwtToken(res.user);
+
 				navigate(from, { replace: true });
 				// } else {
 				// 	logout();

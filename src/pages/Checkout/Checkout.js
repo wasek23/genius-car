@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useNavigate, useLoaderData } from 'react-router-dom';
 
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
@@ -9,6 +9,8 @@ const Checkout = () => {
 	const { user } = useContext(AuthContext);
 	const service = useLoaderData();
 	const { _id, title, price } = service;
+
+	const navigate = useNavigate();
 
 	const onPlaceOrder = e => {
 		e.preventDefault();
@@ -32,7 +34,8 @@ const Checkout = () => {
 		fetch('http://localhost:5000/orders', {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				authorization: `Bearer ${localStorage.getItem('geniusToken')}`
 			},
 			body: JSON.stringify(order)
 		})
@@ -40,6 +43,7 @@ const Checkout = () => {
 			.then(data => {
 				if (data.acknowledged) {
 					alert('Order placed successfully!');
+					navigate('/orders');
 					form.reset();
 				}
 			})

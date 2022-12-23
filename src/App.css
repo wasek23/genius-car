@@ -30,6 +30,12 @@
 	border: none;
 }
 
+.btn.sm {
+	font-size: 15px;
+	line-height: 100%;
+	padding: 0 15px;
+}
+
 .btn.secondary {
 	background-color: #fff3;
 }

@@ -4,21 +4,32 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import Order from './Order';
 
 const Orders = () => {
-	const { user } = useContext(AuthContext);
+	const { user, logout } = useContext(AuthContext);
 
 	const [orders, setOrders] = useState([]);
 
 	useEffect(() => {
-		fetch(`http://localhost:5000/orders?email=${user?.email}`)
-			.then(res => res.json())
+		fetch(`http://localhost:5000/orders?email=${user?.email}`, {
+			headers: {
+				authorization: `Bearer ${localStorage.getItem('geniusToken')}`
+			}
+		})
+			.then(res => {
+				console.log(res.status);
+				if (401 === res.status || 403 === res.status) {
+					return logout();
+				}
+				return res.json()
+			})
 			.then(data => setOrders(data));
-	}, [user]);
+	}, [user, logout]);
 
 	const onStatusUpdate = (id, status = 'Approved') => {
 		fetch(`http://localhost:5000/orders/${id}`, {
 			method: 'PATCH',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				authorization: `Bearer ${localStorage.getItem('geniusToken')}`
 			},
 			body: JSON.stringify({ status })
 		})
@@ -40,7 +51,10 @@ const Orders = () => {
 
 		if (proceed) {
 			fetch(`http://localhost:5000/orders/${id}`, {
-				method: 'DELETE'
+				method: 'DELETE',
+				headers: {
+					authorization: `Bearer ${localStorage.getItem('geniusToken')}`
+				}
 			})
 				.then(res => res.json())
 				.then(data => {

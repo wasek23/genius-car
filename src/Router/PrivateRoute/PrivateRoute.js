@@ -11,6 +11,6 @@ const PrivateRoute = ({ children }) => {
 		return <h2 className='text-5xl text-center my-5'>Loading...</h2>
 	}
 
-	return user ? children : <Navigate state={{ from: location }} replace />
+	return user ? children : <Navigate to='/sign-in' state={{ from: location }} replace />
 }
 export default PrivateRoute;

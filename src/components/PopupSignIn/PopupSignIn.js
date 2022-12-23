@@ -4,6 +4,7 @@ import { GoogleAuthProvider } from 'firebase/auth';
 
 import { googleIcon } from '../../utils/icons';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import { setJwtToken } from '../../utils/functions';
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -18,6 +19,9 @@ const PopupSignIn = ({ setError }) => {
 		loginWithPopup(provider)
 			.then(res => {
 				setError('');
+
+				setJwtToken(res.user);
+
 				navigate(from, { replace: true });
 			})
 			.catch(err => setError(err?.message));
